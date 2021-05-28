@@ -1,0 +1,84 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using DatabaseService_Grpc;
+using Grpc.Core;
+
+namespace GrpcServiceForAngular.Services
+{
+    public class DatabaseServerService : GrpcDatabaseProject.GrpcDatabaseProjectBase
+    {
+        //This is the Angular Server side og the application.
+
+        #region Project
+        public override Task<D_Project> GetProject(UserDbInfomation infomation, ServerCallContext context)
+        {
+            return new ProxyToDataServerHandler().GetProject(infomation);
+        }
+        public override Task<intger> AddProject(ProjectUserInfomation infomation, ServerCallContext context)
+        {
+            return new ProxyToDataServerHandler().AddProject(infomation);
+        }
+        public override Task<intger> EditProject(ProjectUserInfomation infomation, ServerCallContext context)
+        {
+
+            return new ProxyToDataServerHandler().EditProject(infomation);
+        }
+
+        public override Task<intger> RemoveProject(ProjectUserInfomation infomation, ServerCallContext context)
+        {
+            return new ProxyToDataServerHandler().RemoveProject(infomation);
+        }
+
+        public override Task<D_Projects> GetProjects(UserDbInfomation infomation, ServerCallContext context)
+        {                      
+            return new ProxyToDataServerHandler().GetProjects(infomation);
+        }
+
+        #endregion
+        #region Docoment
+        public Task<D_Documents> GetDocuments(UserDbInfomation infomation)
+        {
+            return new ProxyToDataServerHandler().GetDocuments(infomation);
+        }
+        // documents
+        public Task<intger> AddDocument(D_Document infomation)
+        {
+            return new ProxyToDataServerHandler().AddDocument(infomation);
+        }
+        public Task<D_Document> GetDocument(UserDbInfomation infomation)
+        {
+            return new ProxyToDataServerHandler().GetDocument(infomation);
+        }
+        public Task<intger> UpdateDocument(D_Document infomation)
+        {
+            return new ProxyToDataServerHandler().UpdateDocument(infomation);
+        }
+
+        public Task<intger> RemoveDocument(UserDbInfomation infomation) 
+        {
+            return new ProxyToDataServerHandler().RemoveDocument(infomation);
+        }
+        #endregion
+        #region Remote
+        public override Task<intger> AddRemoteFile(D_RemoteFile infomation, ServerCallContext context) {
+            return new ProxyToDataServerHandler().AddRemoteFile(infomation);
+        }
+        public override Task<D_RemoteFile> GetRemoteFile(UserDbInfomation infomation, ServerCallContext context) {
+            return new ProxyToDataServerHandler().GetRemoteFile(infomation);
+        }
+        public override Task<D_RemoteFile> UpdateRemoteFile(D_RemoteFile infomation, ServerCallContext context) {
+            return new ProxyToDataServerHandler().UpdateRemoteFile(infomation);
+        }
+        public override Task<intger> RemoveRemoteFile(UserDbInfomation infomation, ServerCallContext context) 
+        {
+            return new ProxyToDataServerHandler().RemoveRemoteFile(infomation);
+        }
+        public override Task<D_RemoteFiles> GetRemoteFiles(UserDbInfomation infomation, ServerCallContext context) {
+            return new ProxyToDataServerHandler().GetRemoteFiles(infomation);
+        }
+        #endregion
+
+    }
+}
