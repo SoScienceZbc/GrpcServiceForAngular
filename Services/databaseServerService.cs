@@ -32,26 +32,26 @@ namespace GrpcServiceForAngular.Services
         }
 
         public override Task<D_Projects> GetProjects(UserDbInfomation infomation, ServerCallContext context)
-        {                      
+        {            
             return new ProxyToDataServerHandler().GetProjects(infomation);
         }
 
         #endregion
         #region Docoment
-        public Task<D_Documents> GetDocuments(UserDbInfomation infomation)
+        public override Task<D_Documents> GetDocuments(UserDbInfomation infomation,ServerCallContext context)
         {
             return new ProxyToDataServerHandler().GetDocuments(infomation);
         }
         // documents
-        public Task<intger> AddDocument(D_Document infomation)
+        public override Task<intger> AddDocument(D_Document infomation, ServerCallContext context)
         {
             return new ProxyToDataServerHandler().AddDocument(infomation);
         }
-        public Task<D_Document> GetDocument(UserDbInfomation infomation)
+        public override Task<D_Document> GetDocument(UserDbInfomation infomation, ServerCallContext context)
         {
             return new ProxyToDataServerHandler().GetDocument(infomation);
         }
-        public Task<intger> UpdateDocument(D_Document infomation)
+        public override Task<intger> UpdateDocument(D_Document infomation, ServerCallContext context)
         {
             return new ProxyToDataServerHandler().UpdateDocument(infomation);
         }

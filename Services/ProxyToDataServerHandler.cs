@@ -15,11 +15,15 @@ namespace GrpcServiceForAngular.Services
         private GrpcDatabaseProject.GrpcDatabaseProjectClient channel;
         public ProxyToDataServerHandler()
         {
+            AppContext.SetSwitch(
+    "System.Net.Http.SocketsHttpHandler.Http2UnencryptedSupport", true);
+            AppContext.SetSwitch("System.Net.Http.SocketsHttpHandler.Http2Support", true);
             channel = new GrpcDatabaseProject.GrpcDatabaseProjectClient(
-                GrpcChannel.ForAddress("http://192.168.1.101:5003",
+                GrpcChannel.ForAddress("http://192.168.1.101:5200",
                 new GrpcChannelOptions
                 {
-                    Credentials = /*new Grpc.Core.SslCredentials()*/ Grpc.Core.ChannelCredentials.Insecure
+                    Credentials = /*new Grpc.Core.SslCredentials()*/ Grpc.Core.ChannelCredentials.Insecure,
+
                 }));
         }
 
@@ -32,7 +36,7 @@ namespace GrpcServiceForAngular.Services
             AppContext.SetSwitch("System.Net.Http.SocketsHttpHandler.Http2UnencryptedSupport", true);
             AppContext.SetSwitch("System.Net.Http.SocketsHttpHandler.Http2Support", true);
             // The port number(5001) must match the port of the gRPC server.
-            using var channel = GrpcChannel.ForAddress("http://192.168.1.101:5003", new GrpcChannelOptions { Credentials = /*new Grpc.Core.SslCredentials()*/ Grpc.Core.ChannelCredentials.Insecure });
+            using var channel = GrpcChannel.ForAddress("http://192.168.1.101:5200", new GrpcChannelOptions { Credentials = /*new Grpc.Core.SslCredentials()*/ Grpc.Core.ChannelCredentials.Insecure });
             var ts = new GrpcDatabaseProject.GrpcDatabaseProjectClient(channel);
             //var testDataGetter = new DataGetter.DataGetterClient(channel);
             UserDbInfomation projectuser = new UserDbInfomation { DbName = "andi0137" };
@@ -63,7 +67,7 @@ namespace GrpcServiceForAngular.Services
 
         #region Project
         public Task<D_Project> GetProject(UserDbInfomation infomation)
-        {
+        {           
             return Task.FromResult(channel.GetProject(infomation));
         }
         public Task<intger> AddProject(ProjectUserInfomation infomation)
@@ -81,7 +85,7 @@ namespace GrpcServiceForAngular.Services
         }
 
         public Task<D_Projects> GetProjects(UserDbInfomation infomation)
-        {           
+        {
             return Task.FromResult(channel.GetProjects(infomation));
         }
 
