@@ -14,10 +14,12 @@ namespace GrpcServiceForAngular.Services
         #region Project
         public override Task<D_Project> GetProject(UserDbInfomation infomation, ServerCallContext context)
         {
+            Console.WriteLine($"Host:{context.Host} called Method:{context.Method}");
             return new ProxyToDataServerHandler().GetProject(infomation);
         }
         public override Task<intger> AddProject(ProjectUserInfomation infomation, ServerCallContext context)
         {
+            Console.WriteLine($"Host:{context.Host} called Method:{context.Method}");
             return new ProxyToDataServerHandler().AddProject(infomation);
         }
         public override Task<intger> EditProject(ProjectUserInfomation infomation, ServerCallContext context)

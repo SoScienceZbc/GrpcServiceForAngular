@@ -12,6 +12,7 @@ using System.Linq;
 using System.Reflection;
 using System.Text.Json;
 using System.Net;
+using System.Threading;
 
 namespace GrpcServiceForAngular
 {
@@ -32,6 +33,7 @@ namespace GrpcServiceForAngular
                     builder.WithExposedHeaders("Grpc-Status", "Grpc-Message");
                 });
             });
+            
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -52,6 +54,12 @@ namespace GrpcServiceForAngular
                 endpoints.MapGrpcService<Services.DatabaseServerService>().RequireCors("MyPolicy").EnableGrpcWeb();
                 endpoints.MapGrpcService<Services.LoginServices>().RequireCors("MyPolicy").EnableGrpcWeb();
             });
+            //Stress Testing
+            //for (int i = 0; i < 5000; i++)
+            //{
+            //    Thread.Sleep(50);                
+            //    Console.WriteLine( "TESTING: From proxy server Login was: " + new Services.LoginServices().LoginAD(new Proto.LoginRequset(), null).Result.LoginSucsefull);
+            //}
         }
     }
 }

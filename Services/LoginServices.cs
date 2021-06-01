@@ -11,6 +11,7 @@ namespace GrpcServiceForAngular.Services
     {
         public override Task<LoginRepley> LoginAD(LoginRequset requset, ServerCallContext context)
         {
+            Console.WriteLine($"Host:{context.Host} called Method:{context.Method}");
             return new LoginToDataServerHandler().LoginAD(requset);    
         }
     }

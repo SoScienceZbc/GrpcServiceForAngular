@@ -2,6 +2,15 @@
 
 	<PropertyGroup>
 		<TargetFramework>netcoreapp3.1</TargetFramework>
+		<StartupObject>GrpcServiceForAngular.Program</StartupObject>
+		<Authors>Alexandar/Andi</Authors>
+		<Company>ZBC-Slaglse</Company>
+		<Description>this is a services for SoScince to be run on a proxy server, as to enable accese to some intern network.</Description>
+		<UserSecretsId>49c738cc-a3b1-40c3-8239-a09f1221c766</UserSecretsId>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+	  <OutputPath>C:\Users\andi0137\Desktop\SoScinceBulidResult\AngularServiceGrpc\</OutputPath>
 	</PropertyGroup>
 
 	<ItemGroup>

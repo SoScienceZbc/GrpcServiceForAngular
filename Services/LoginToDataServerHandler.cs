@@ -17,8 +17,8 @@ namespace GrpcServiceForAngular.Services
         {
 
             AppContext.SetSwitch("System.Net.Http.SocketsHttpHandler.Http2UnencryptedSupport", true);
-            AppContext.SetSwitch("System.Net.Http.SocketsHttpHandler.Http2Support", true);
-            channel = new LoginServcie.LoginServcieClient(GrpcChannel.ForAddress("http://192.168.1.101:33699",
+            AppContext.SetSwitch("System.Net.Http.SocketsHttpHandler.Http2Support", true);            
+            channel = new LoginServcie.LoginServcieClient(GrpcChannel.ForAddress("http://192.168.1.102:33700",
                 new GrpcChannelOptions
                 {
                     Credentials = /*new Grpc.Core.SslCredentials()*/ Grpc.Core.ChannelCredentials.Insecure,
@@ -32,7 +32,7 @@ namespace GrpcServiceForAngular.Services
         /// <returns></returns>
         public Task<LoginRepley> LoginAD(LoginRequset requset)
         {
-            return channel.LoginADAsync(requset).ResponseAsync;
+            return Task.FromResult(channel.LoginAD(requset));
         }
     }
 }
