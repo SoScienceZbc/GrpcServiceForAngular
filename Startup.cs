@@ -50,6 +50,7 @@ namespace GrpcServiceForAngular
             {
                 //endpoints.MapGrpcService<CountryService>().RequireCors("MyPolicy").EnableGrpcWeb();
                 endpoints.MapGrpcService<Services.DatabaseServerService>().RequireCors("MyPolicy").EnableGrpcWeb();
+                endpoints.MapGrpcService<Services.LoginServices>().RequireCors("MyPolicy").EnableGrpcWeb();
             });
         }
     }

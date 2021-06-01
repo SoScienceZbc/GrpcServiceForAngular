@@ -5,6 +5,7 @@
 	</PropertyGroup>
 
 	<ItemGroup>
+		<Protobuf Include="Protos\AdLookupProto.proto" />
 		<Protobuf Include="Protos\greet.proto" GrpcServices="Server" />
 		<Protobuf Include="Protos\Database.proto" />
 	</ItemGroup>

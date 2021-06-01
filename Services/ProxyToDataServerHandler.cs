@@ -19,7 +19,7 @@ namespace GrpcServiceForAngular.Services
     "System.Net.Http.SocketsHttpHandler.Http2UnencryptedSupport", true);
             AppContext.SetSwitch("System.Net.Http.SocketsHttpHandler.Http2Support", true);
             channel = new GrpcDatabaseProject.GrpcDatabaseProjectClient(
-                GrpcChannel.ForAddress("http://192.168.1.101:5200",
+                GrpcChannel.ForAddress("http://192.168.1.101:33699",
                 new GrpcChannelOptions
                 {
                     Credentials = /*new Grpc.Core.SslCredentials()*/ Grpc.Core.ChannelCredentials.Insecure,
