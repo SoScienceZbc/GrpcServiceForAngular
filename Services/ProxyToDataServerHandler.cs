@@ -19,7 +19,7 @@ namespace GrpcServiceForAngular.Services
     "System.Net.Http.SocketsHttpHandler.Http2UnencryptedSupport", true);
             AppContext.SetSwitch("System.Net.Http.SocketsHttpHandler.Http2Support", true);
             channel = new GrpcDatabaseProject.GrpcDatabaseProjectClient(
-                GrpcChannel.ForAddress("http://192.168.1.102:33700",
+                GrpcChannel.ForAddress("http://localhost:33700",
                 new GrpcChannelOptions
                 {
                     Credentials = /*new Grpc.Core.SslCredentials()*/ Grpc.Core.ChannelCredentials.Insecure,
@@ -67,7 +67,7 @@ namespace GrpcServiceForAngular.Services
 
         #region Project
         public Task<D_Project> GetProject(UserDbInfomation infomation)
-        {           
+        {
             return Task.FromResult(channel.GetProject(infomation));
         }
         public Task<intger> AddProject(ProjectUserInfomation infomation)

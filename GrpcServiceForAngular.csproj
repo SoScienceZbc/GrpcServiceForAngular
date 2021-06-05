@@ -14,7 +14,7 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<Protobuf Include="Protos\AdLookupProto.proto" />
+		<Protobuf Include="Protos\AdLookupProto.proto" GrpcServices="Both" />
 		<Protobuf Include="Protos\greet.proto" GrpcServices="Server" />
 		<Protobuf Include="Protos\Database.proto" />
 	</ItemGroup>
