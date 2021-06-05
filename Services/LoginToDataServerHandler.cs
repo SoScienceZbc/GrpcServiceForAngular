@@ -19,10 +19,10 @@ namespace GrpcServiceForAngular.Services
         public LoginToDataServerHandler()
         {
 
+            GrpcWebHandler handler = new GrpcWebHandler(GrpcWebMode.GrpcWebText, new HttpClientHandler());
             //AppContext.SetSwitch("System.Net.Http.SocketsHttpHandler.Http2UnencryptedSupport", true);
             //AppContext.SetSwitch("System.Net.Http.SocketsHttpHandler.Http2Support", true);
-            GrpcWebHandler handler = new GrpcWebHandler(GrpcWebMode.GrpcWebText, new HttpClientHandler());
-            channel = new LoginServcie.LoginServcieClient(GrpcChannel.ForAddress(new Uri("http://localhost:33700/"),
+            channel = new LoginServcie.LoginServcieClient(GrpcChannel.ForAddress(new Uri("http://localhost:33700"),
                 new GrpcChannelOptions
                 {
                     HttpClient = new HttpClient(handler),
@@ -37,19 +37,8 @@ namespace GrpcServiceForAngular.Services
         /// <param name="requset"></param>
         /// <returns></returns>
         public Task<LoginRepley> LoginAD(LoginRequset requset)
-        {
-            //LoginServcie.LoginServcieClient hhtp2Channel = new LoginServcie.LoginServcieClient(GrpcChannel.ForAddress(new Uri("http://localhost:5001"),
-            //    new GrpcChannelOptions
-            //    {
-            //        Credentials = /*new Grpc.Core.SslCredentials()*/ Grpc.Core.ChannelCredentials.Insecure,
-
-
-            //    }));
-
-            //    LoginRepley repley = hhtp2Channel.LoginAD(requset);
-            //    Console.WriteLine($"loginattampt:\n login was:{repley.LoginSucsefull}\nUsername: {requset.Username}");            
+        {      
                 return Task.FromResult(channel.LoginAD(requset));
-
             
         }
     }
