@@ -58,7 +58,7 @@ namespace GrpcServiceForAngular.Services
             return new ProxyToDataServerHandler().UpdateDocument(infomation);
         }
 
-        public Task<intger> RemoveDocument(UserDbInfomation infomation) 
+        public override Task<intger> RemoveDocument(ProjectUserInfomation infomation,ServerCallContext context) 
         {
             return new ProxyToDataServerHandler().RemoveDocument(infomation);
         }

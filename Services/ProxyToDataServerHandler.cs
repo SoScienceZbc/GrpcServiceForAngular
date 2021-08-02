@@ -1,8 +1,10 @@
 ﻿using DatabaseService_Grpc;
 using Grpc.Net.Client;
+using Grpc.Net.Client.Web;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Threading.Tasks;
 
 namespace GrpcServiceForAngular.Services
@@ -12,17 +14,21 @@ namespace GrpcServiceForAngular.Services
     /// </summary>
     public class ProxyToDataServerHandler
     {
+        /// <summary>
+        /// This channel is the client that calls the rpc on the sshagentMainDataServer
+        /// </summary>
+        GrpcWebHandler handler = new GrpcWebHandler(GrpcWebMode.GrpcWebText, new HttpClientHandler());
         private GrpcDatabaseProject.GrpcDatabaseProjectClient channel;
         public ProxyToDataServerHandler()
         {
-            AppContext.SetSwitch(
-    "System.Net.Http.SocketsHttpHandler.Http2UnencryptedSupport", true);
-            AppContext.SetSwitch("System.Net.Http.SocketsHttpHandler.Http2Support", true);
+            //AppContext.SetSwitch("System.Net.Http.SocketsHttpHandler.Http2UnencryptedSupport", true);
+            //AppContext.SetSwitch("System.Net.Http.SocketsHttpHandler.Http2Support", true);
             channel = new GrpcDatabaseProject.GrpcDatabaseProjectClient(
                 GrpcChannel.ForAddress("http://localhost:33700",
                 new GrpcChannelOptions
                 {
-                    Credentials = /*new Grpc.Core.SslCredentials()*/ Grpc.Core.ChannelCredentials.Insecure,
+                    HttpClient = new HttpClient(handler),
+                    Credentials = /*new Grpc.Core.SslCredentials()*/ Grpc.Core.ChannelCredentials.Insecure,                    
 
                 }));
         }
@@ -50,20 +56,6 @@ namespace GrpcServiceForAngular.Services
             intger replyDatabase = ts.AddProject(protobufProject);
             Console.WriteLine("This amount have change in the database:" + replyDatabase);
         }
-        /// <summary>
-        /// This is a example on how to use grpc.. 
-        /// </summary>
-        /// <param name="infomation"></param>
-        /// <returns></returns>
-        public D_Projects GetProjectsLite(UserDbInfomation infomation)
-        {
-            using var channel = GrpcChannel.ForAddress("http://192.168.1.101:5003", new GrpcChannelOptions { Credentials = /*new Grpc.Core.SslCredentials()*/ Grpc.Core.ChannelCredentials.Insecure });
-            var ts = new GrpcDatabaseProject.GrpcDatabaseProjectClient(channel);
-            UserDbInfomation mortUser = new UserDbInfomation { DbName = "mort286f", ID = 199 };
-            return ts.GetProjects(mortUser);
-
-        }
-
 
         #region Project
         public Task<D_Project> GetProject(UserDbInfomation infomation)
@@ -109,9 +101,9 @@ namespace GrpcServiceForAngular.Services
             return Task.FromResult(channel.UpdateDocument(infomation));
         }
 
-        public Task<intger> RemoveDocument(UserDbInfomation infomation)
+        public Task<intger> RemoveDocument(ProjectUserInfomation infomation)
         {
-            return Task.FromResult(channel.RemoveRemoteFile(infomation));
+            return Task.FromResult(channel.RemoveDocument(infomation));
 
         }
         #endregion

@@ -35,13 +35,12 @@ namespace GrpcServiceForAngular
             }
             app.UseRouting();
             app.UseCors();
-            app.UseGrpcWeb();
-            //app.UseGrpcWeb(new GrpcWebOptions { DefaultEnabled = true });
+            app.UseGrpcWeb();            
 
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapGrpcService<Services.LoginServices>().RequireCors("MyPolicy").EnableGrpcWeb();
-                //endpoints.MapGrpcService<Services.DatabaseServerService>().RequireCors("MyPolicy").EnableGrpcWeb();
+                endpoints.MapGrpcService<Services.DatabaseServerService>().RequireCors("MyPolicy").EnableGrpcWeb();
             });
         }
     }
