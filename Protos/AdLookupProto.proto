@@ -14,4 +14,5 @@ string password = 2;
 
 message LoginRepley {
 	bool loginSucsefull = 1;
+	bool admin = 2;
 }

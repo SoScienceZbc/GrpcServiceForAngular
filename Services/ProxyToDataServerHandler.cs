@@ -18,7 +18,7 @@ namespace GrpcServiceForAngular.Services
         /// This channel is the client that calls the rpc on the sshagentMainDataServer
         /// </summary>
         GrpcWebHandler handler = new GrpcWebHandler(GrpcWebMode.GrpcWebText, new HttpClientHandler());
-        private GrpcDatabaseProject.GrpcDatabaseProjectClient channel;
+        private static GrpcDatabaseProject.GrpcDatabaseProjectClient channel;
         public ProxyToDataServerHandler()
         {
             //AppContext.SetSwitch("System.Net.Http.SocketsHttpHandler.Http2UnencryptedSupport", true);
