@@ -7,7 +7,7 @@ using Proto;
 
 namespace GrpcServiceForAngular.Services
 {
-    public class LoginServices : LoginServcie.LoginServcieBase
+    public class LoginServices : LoginService.LoginServiceBase
     {
         public override Task<LoginRepley> LoginAD(LoginRequset requset, ServerCallContext context)
         {

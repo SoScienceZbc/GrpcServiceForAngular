@@ -14,7 +14,7 @@ namespace GrpcServiceForAngular.Services
     /// </summary>
     public class LoginToDataServerHandler
     {
-        public static LoginServcie.LoginServcieClient channel;
+        public static LoginService.LoginServiceClient channel;
 
         public LoginToDataServerHandler()
         {
@@ -22,7 +22,7 @@ namespace GrpcServiceForAngular.Services
             GrpcWebHandler handler = new GrpcWebHandler(GrpcWebMode.GrpcWebText, new HttpClientHandler());
             //AppContext.SetSwitch("System.Net.Http.SocketsHttpHandler.Http2UnencryptedSupport", true);
             //AppContext.SetSwitch("System.Net.Http.SocketsHttpHandler.Http2Support", true);
-            channel = new LoginServcie.LoginServcieClient(GrpcChannel.ForAddress(new Uri("http://localhost:33700"),
+            channel = new LoginService.LoginServiceClient(GrpcChannel.ForAddress(new Uri("http://localhost:33700"),
                 new GrpcChannelOptions
                 {
                     HttpClient = new HttpClient(handler),
