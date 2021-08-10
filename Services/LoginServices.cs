@@ -17,5 +17,14 @@ namespace GrpcServiceForAngular.Services
             //$"HttpContex_Connection.RemoteIpAddress:{context.GetHttpContext().Connection.RemoteIpAddress}");
                 return new LoginToDataServerHandler().LoginAD(requset);
         }
+
+        public override Task<LoginRepley> ValidateToken(LoginRepley request, ServerCallContext context)
+        {
+
+            Console.WriteLine($"Host:{context.Host} called Method:{context.Method}\nPeer Addresse : {context.Peer}\n" +
+                $"RequstHeader: {context.RequestHeaders}\n");
+            //$"HttpContex_Connection.RemoteIpAddress:{context.GetHttpContext().Connection.RemoteIpAddress}");
+            return new LoginToDataServerHandler().ValidateToken(request);
+        }
     }
 }

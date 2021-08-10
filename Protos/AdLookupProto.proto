@@ -5,6 +5,7 @@ package LoginGRPC;
 
 service LoginServcie {
   rpc LoginAD(LoginRequset) returns (LoginRepley) {}
+  rpc ValidateToken(LoginRepley) returns (LoginRepley) {}
 }
 
 message LoginRequset {

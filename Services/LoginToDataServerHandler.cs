@@ -41,5 +41,10 @@ namespace GrpcServiceForAngular.Services
                 return Task.FromResult(channel.LoginAD(requset));
             
         }
+        public Task<LoginRepley> ValidateToken(LoginRepley requset)
+        {
+            return Task.FromResult(channel.ValidateToken(requset));
+
+        }
     }
 }
