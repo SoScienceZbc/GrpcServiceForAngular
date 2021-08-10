@@ -3,7 +3,7 @@ syntax = "proto3";
 option csharp_namespace = "Proto";
 package LoginGRPC;
 
-service LoginServcie {
+service LoginService {
   rpc LoginAD(LoginRequset) returns (LoginRepley) {}
   rpc ValidateToken(LoginRepley) returns (LoginRepley) {}
 }
