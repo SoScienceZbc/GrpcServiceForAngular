@@ -24,6 +24,9 @@ rpc GetRemoteFile(UserDbInfomation) returns (D_RemoteFile);
 rpc UpdateRemoteFile(D_RemoteFile) returns (D_RemoteFile);
 rpc RemoveRemoteFile(UserDbInfomation) returns (intger);
 rpc GetRemoteFiles(UserDbInfomation) returns (D_RemoteFiles);
+// Subject
+rpc AddSubject(D_Subject) returns (intger);
+rpc GetSubjects(UserDbInfomation) returns (D_Subjects);
 }
 
 message UserDbInfomation{
@@ -50,6 +53,9 @@ message D_Projects{
 message D_RemoteFiles{
     repeated D_RemoteFile D_RemoteFile = 1;
 }
+message D_Subjects{
+    repeated D_Subject Subject = 1;
+}
 // Project
 
 message D_Project{
@@ -59,6 +65,7 @@ message D_Project{
     string lastedited = 4;
     string endDate = 5;
     repeated D_Document documents = 6;
+    int32 ProjectThemeID = 7;
 }
 // document
 message D_Document{
@@ -77,4 +84,9 @@ message D_RemoteFile{
      string type = 3;
      int32 projectID = 4;
      string path = 5;
+}
+// Subject
+message D_Subject {
+    UserDbInfomation user = 1;
+    string name = 2;
 }
