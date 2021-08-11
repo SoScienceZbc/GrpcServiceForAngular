@@ -24,7 +24,6 @@ namespace GrpcServiceForAngular.Services
         }
         public override Task<intger> EditProject(ProjectUserInfomation infomation, ServerCallContext context)
         {
-
             return new ProxyToDataServerHandler().EditProject(infomation);
         }
 
