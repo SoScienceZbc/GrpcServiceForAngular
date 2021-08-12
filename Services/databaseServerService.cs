@@ -80,6 +80,11 @@ namespace GrpcServiceForAngular.Services
             return new ProxyToDataServerHandler().GetRemoteFiles(infomation);
         }
         #endregion
-
+        #region Subject
+        public override Task<intger> AddSubject(D_Subject request, ServerCallContext context)
+        {
+            return new ProxyToDataServerHandler().AddSubject(request);
+        }
+        #endregion
     }
 }
