@@ -140,5 +140,19 @@ namespace GrpcServiceForAngular.Services
             return Task.FromResult(channel.GetSubjects(information));
         }
         #endregion
+        #region Project Theme
+        public Task<intger> AddProjectTheme(D_ProjectTheme theme)
+        {
+            return Task.FromResult(channel.AddProjectTheme(theme));
+        }
+        public Task<D_ProjectThemes> Get_ProjectThemes(UserDbInfomation infomation)
+        {
+            return Task.FromResult(channel.GetProjectThemes(infomation));
+        }
+        public Task<D_ProjectThemes> Get_ProjectThemesFromSubject(ThemeFromSubject infomation)
+        {
+            return Task.FromResult(channel.GetProjectThemesFromSubject(infomation));
+        }
+        #endregion
     }
 }
