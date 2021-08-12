@@ -135,6 +135,10 @@ namespace GrpcServiceForAngular.Services
         {
             return Task.FromResult(channel.AddSubject(subject));
         }
+        public Task<D_Subjects> GetSubjects(UserDbInfomation information)
+        {
+            return Task.FromResult(channel.GetSubjects(information));
+        }
         #endregion
     }
 }

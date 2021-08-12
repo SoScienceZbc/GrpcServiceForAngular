@@ -85,6 +85,11 @@ namespace GrpcServiceForAngular.Services
         {
             return new ProxyToDataServerHandler().AddSubject(request);
         }
+
+        public override Task<D_Subjects> GetSubjects(UserDbInfomation request, ServerCallContext context)
+        {
+            return new ProxyToDataServerHandler().GetSubjects(request);
+        }
         #endregion
     }
 }
