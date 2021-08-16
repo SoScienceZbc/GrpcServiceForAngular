@@ -10,74 +10,75 @@ namespace GrpcServiceForAngular.Services
     public class DatabaseServerService : GrpcDatabaseProject.GrpcDatabaseProjectBase
     {
         //This is the Angular Server side og the application.
-
+        private static ProxyToDataServerHandler proxy = new ProxyToDataServerHandler();
+     
         #region Project
         public override Task<D_Project> GetProject(UserDbInfomation infomation, ServerCallContext context)
         {
             Console.WriteLine($"Host:{context.Host} called Method:{context.Method}");
-            return new ProxyToDataServerHandler().GetProject(infomation);
+            return proxy.GetProject(infomation);
         }
         public override Task<intger> AddProject(ProjectUserInfomation infomation, ServerCallContext context)
         {
             Console.WriteLine($"Host:{context.Host} called Method:{context.Method}");
-            return new ProxyToDataServerHandler().AddProject(infomation);
+            return proxy.AddProject(infomation);
         }
         public override Task<intger> EditProject(ProjectUserInfomation infomation, ServerCallContext context)
         {
-            return new ProxyToDataServerHandler().EditProject(infomation);
+            return proxy.EditProject(infomation);
         }
 
         public override Task<intger> RemoveProject(ProjectUserInfomation infomation, ServerCallContext context)
         {
-            return new ProxyToDataServerHandler().RemoveProject(infomation);
+            return proxy.RemoveProject(infomation);
         }
 
         public override Task<D_Projects> GetProjects(UserDbInfomation infomation, ServerCallContext context)
         {            
-            return new ProxyToDataServerHandler().GetProjects(infomation);
+            return proxy.GetProjects(infomation);
         }
 
         #endregion
         #region Docoment
         public override Task<D_Documents> GetDocuments(UserDbInfomation infomation,ServerCallContext context)
         {
-            return new ProxyToDataServerHandler().GetDocuments(infomation);
+            return proxy.GetDocuments(infomation);
         }
         // documents
         public override Task<intger> AddDocument(D_Document infomation, ServerCallContext context)
         {
-            return new ProxyToDataServerHandler().AddDocument(infomation);
+            return proxy.AddDocument(infomation);
         }
         public override Task<D_Document> GetDocument(UserDbInfomation infomation, ServerCallContext context)
         {
-            return new ProxyToDataServerHandler().GetDocument(infomation);
+            return proxy.GetDocument(infomation);
         }
         public override Task<intger> UpdateDocument(D_Document infomation, ServerCallContext context)
         {
-            return new ProxyToDataServerHandler().UpdateDocument(infomation);
+            return proxy.UpdateDocument(infomation);
         }
 
         public override Task<intger> RemoveDocument(ProjectUserInfomation infomation,ServerCallContext context) 
         {
-            return new ProxyToDataServerHandler().RemoveDocument(infomation);
+            return proxy.RemoveDocument(infomation);
         }
         #endregion
         #region Remote
         public override Task<intger> AddRemoteFile(D_RemoteFile infomation, ServerCallContext context) {
-            return new ProxyToDataServerHandler().AddRemoteFile(infomation);
+            return proxy.AddRemoteFile(infomation);
         }
         public override Task<D_RemoteFile> GetRemoteFile(UserDbInfomation infomation, ServerCallContext context) {
-            return new ProxyToDataServerHandler().GetRemoteFile(infomation);
+            return proxy.GetRemoteFile(infomation);
         }
         public override Task<D_RemoteFile> UpdateRemoteFile(D_RemoteFile infomation, ServerCallContext context) {
-            return new ProxyToDataServerHandler().UpdateRemoteFile(infomation);
+            return proxy.UpdateRemoteFile(infomation);
         }
         public override Task<intger> RemoveRemoteFile(UserDbInfomation infomation, ServerCallContext context) 
         {
-            return new ProxyToDataServerHandler().RemoveRemoteFile(infomation);
+            return proxy.RemoveRemoteFile(infomation);
         }
         public override Task<D_RemoteFiles> GetRemoteFiles(UserDbInfomation infomation, ServerCallContext context) {
-            return new ProxyToDataServerHandler().GetRemoteFiles(infomation);
+            return proxy.GetRemoteFiles(infomation);
         }
         #endregion
 

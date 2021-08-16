@@ -9,22 +9,21 @@ namespace GrpcServiceForAngular.Services
 {
     public class LoginServices : LoginService.LoginServiceBase
     {
+        private static LoginToDataServerHandler loginHandler = new LoginToDataServerHandler();
         public override Task<LoginRepley> LoginAD(LoginRequset requset, ServerCallContext context)
         {
-
             Console.WriteLine($"Host:{context.Host} called Method:{context.Method}\nPeer Addresse : {context.Peer}\n" +
                 $"RequstHeader: {context.RequestHeaders}\n");
             //$"HttpContex_Connection.RemoteIpAddress:{context.GetHttpContext().Connection.RemoteIpAddress}");
-                return new LoginToDataServerHandler().LoginAD(requset);
+                return loginHandler.LoginAD(requset);
         }
 
         public override Task<LoginRepley> ValidateToken(LoginRepley request, ServerCallContext context)
         {
-
             Console.WriteLine($"Host:{context.Host} called Method:{context.Method}\nPeer Addresse : {context.Peer}\n" +
                 $"RequstHeader: {context.RequestHeaders}\n");
             //$"HttpContex_Connection.RemoteIpAddress:{context.GetHttpContext().Connection.RemoteIpAddress}");
-            return new LoginToDataServerHandler().ValidateToken(request);
+            return loginHandler.ValidateToken(request);
         }
     }
 }
