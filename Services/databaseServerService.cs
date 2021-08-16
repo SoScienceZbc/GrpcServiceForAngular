@@ -105,6 +105,14 @@ namespace GrpcServiceForAngular.Services
         {
             return proxy.Get_ProjectThemesFromSubject(request);
         }
+        public override Task<intger> AddProjectThemeCoTeacher(ProjectThemeUserInfomation request, ServerCallContext context)
+        {
+            return proxy.AddProjectThemeCoTeacher(request);
+        }
+        public override Task<intger> RemoveProjectTheme(ProjectThemeUserInfomation request, ServerCallContext context)
+        {
+            return proxy.RemoveProjectTheme(request);
+        }
         #endregion
     }
 }
