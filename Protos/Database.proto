@@ -24,7 +24,20 @@ rpc GetRemoteFile(UserDbInfomation) returns (D_RemoteFile);
 rpc UpdateRemoteFile(D_RemoteFile) returns (D_RemoteFile);
 rpc RemoveRemoteFile(UserDbInfomation) returns (intger);
 rpc GetRemoteFiles(UserDbInfomation) returns (D_RemoteFiles);
+// Subject
+rpc AddSubject(D_Subject) returns (intger);
+rpc GetSubjects(UserDbInfomation) returns (D_Subjects);
+// ProjectTheme
+rpc AddProjectTheme(D_ProjectTheme) returns (intger);
+rpc GetProjectThemes(UserDbInfomation) returns (D_ProjectThemes);
+rpc GetProjectThemesFromSubject(ThemeFromSubject) returns (D_ProjectThemes);
 }
+
+message ThemeFromSubject{
+    UserDbInfomation user = 1;
+    D_Subject subject = 2;
+}
+
 
 message UserDbInfomation{
     int32 ID = 1;
@@ -50,6 +63,12 @@ message D_Projects{
 message D_RemoteFiles{
     repeated D_RemoteFile D_RemoteFile = 1;
 }
+message D_Subjects{
+    repeated D_Subject Subject = 1;
+}
+message D_ProjectThemes {
+    repeated D_ProjectTheme ProjectTheme = 1;
+}
 // Project
 
 message D_Project{
@@ -59,6 +78,7 @@ message D_Project{
     string lastedited = 4;
     string endDate = 5;
     repeated D_Document documents = 6;
+    int32 ProjectThemeID = 7;
 }
 // document
 message D_Document{
@@ -77,4 +97,20 @@ message D_RemoteFile{
      string type = 3;
      int32 projectID = 4;
      string path = 5;
+}
+// Subject
+message D_Subject {
+    UserDbInfomation user = 1;
+    string name = 2;
+    int32 ID = 3;
+}
+
+// Project Theme
+message D_ProjectTheme {
+    int32 ID = 1;
+    string name = 2;
+    string endDate = 3;
+    string lastEdited = 4;
+    string Teacher = 5;
+    int32 subjectID = 6;
 }
