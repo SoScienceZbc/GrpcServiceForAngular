@@ -84,26 +84,26 @@ namespace GrpcServiceForAngular.Services
         #region Subject
         public override Task<intger> AddSubject(D_Subject request, ServerCallContext context)
         {
-            return new ProxyToDataServerHandler().AddSubject(request);
+            return proxy.AddSubject(request);
         }
 
         public override Task<D_Subjects> GetSubjects(UserDbInfomation request, ServerCallContext context)
         {
-            return new ProxyToDataServerHandler().GetSubjects(request);
+            return proxy.GetSubjects(request);
         }
         #endregion
         #region Project Theme
         public override Task<intger> AddProjectTheme(D_ProjectTheme request, ServerCallContext context)
         {
-            return new ProxyToDataServerHandler().AddProjectTheme(request);
+            return proxy.AddProjectTheme(request);
         }
         public override Task<D_ProjectThemes> GetProjectThemes(UserDbInfomation request, ServerCallContext context)
         {
-            return new ProxyToDataServerHandler().Get_ProjectThemes(request);
+            return proxy.Get_ProjectThemes(request);
         }
         public override Task<D_ProjectThemes> GetProjectThemesFromSubject(ThemeFromSubject request, ServerCallContext context)
         {
-            return new ProxyToDataServerHandler().Get_ProjectThemesFromSubject(request);
+            return proxy.Get_ProjectThemesFromSubject(request);
         }
         #endregion
     }
