@@ -161,6 +161,10 @@ namespace GrpcServiceForAngular.Services
         {
             return Task.FromResult(channel.AddProjectThemeCoTeacher(infomation));
         }
+        public Task<intger> RemoveProjectThemeCoTeacher(ProjectThemeUserInfomation infomation)
+        {
+            return Task.FromResult(channel.RemoveProjectThemeCoTeacher(infomation));
+        }
         #endregion
     }
 }
