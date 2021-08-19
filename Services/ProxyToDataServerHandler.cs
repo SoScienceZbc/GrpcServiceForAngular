@@ -80,7 +80,14 @@ namespace GrpcServiceForAngular.Services
         {
             return Task.FromResult(channel.GetProjects(infomation));
         }
-
+        public Task<intger> AddProjectMember(MemberInformation information)
+        {
+            return Task.FromResult(channel.AddProjectMember(information));
+        }
+        public Task<intger> RemoveProjectMember(MemberInformation information)
+        {
+            return Task.FromResult(channel.RemoveProjectMember(information));
+        }
         #endregion
         #region Docoment
         public Task<D_Documents> GetDocuments(UserDbInfomation infomation)

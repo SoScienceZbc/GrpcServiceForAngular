@@ -13,72 +13,77 @@ namespace GrpcServiceForAngular.Services
         private static ProxyToDataServerHandler proxy = new ProxyToDataServerHandler();
      
         #region Project
-        public override Task<D_Project> GetProject(UserDbInfomation infomation, ServerCallContext context)
+        public override Task<D_Project> GetProject(UserDbInfomation Request, ServerCallContext context)
         {
             Console.WriteLine($"Host:{context.Host} called Method:{context.Method}");
-            return proxy.GetProject(infomation);
+            return proxy.GetProject(Request);
         }
-        public override Task<intger> AddProject(ProjectUserInfomation infomation, ServerCallContext context)
+        public override Task<intger> AddProject(ProjectUserInfomation Request, ServerCallContext context)
         {
             Console.WriteLine($"Host:{context.Host} called Method:{context.Method}");
-            return proxy.AddProject(infomation);
+            return proxy.AddProject(Request);
         }
-        public override Task<intger> EditProject(ProjectUserInfomation infomation, ServerCallContext context)
+        public override Task<intger> EditProject(ProjectUserInfomation Request, ServerCallContext context)
         {
-            return proxy.EditProject(infomation);
+            return proxy.EditProject(Request);
         }
-
-        public override Task<intger> RemoveProject(ProjectUserInfomation infomation, ServerCallContext context)
+        public override Task<intger> RemoveProject(ProjectUserInfomation Request, ServerCallContext context)
         {
-            return proxy.RemoveProject(infomation);
+            return proxy.RemoveProject(Request);
         }
-
-        public override Task<D_Projects> GetProjects(UserDbInfomation infomation, ServerCallContext context)
+        public override Task<D_Projects> GetProjects(UserDbInfomation Request, ServerCallContext context)
         {            
-            return proxy.GetProjects(infomation);
+            return proxy.GetProjects(Request);
         }
-
+        public override Task<intger> AddProjectMember(MemberInformation Request, ServerCallContext context)
+        {
+            return proxy.AddProjectMember(Request);
+        }
+        public override Task<intger> RemoveProjectMember(MemberInformation Request, ServerCallContext context)
+        {
+            return proxy.RemoveProjectMember(Request);
+        }
         #endregion
         #region Docoment
-        public override Task<D_Documents> GetDocuments(UserDbInfomation infomation,ServerCallContext context)
+        public override Task<D_Documents> GetDocuments(UserDbInfomation Request,ServerCallContext context)
         {
-            return proxy.GetDocuments(infomation);
+            return proxy.GetDocuments(Request);
         }
         // documents
-        public override Task<intger> AddDocument(D_Document infomation, ServerCallContext context)
+        public override Task<intger> AddDocument(D_Document Request, ServerCallContext context)
         {
-            return proxy.AddDocument(infomation);
+            return proxy.AddDocument(Request);
         }
-        public override Task<D_Document> GetDocument(UserDbInfomation infomation, ServerCallContext context)
+        public override Task<D_Document> GetDocument(UserDbInfomation Request, ServerCallContext context)
         {
-            return proxy.GetDocument(infomation);
+            return proxy.GetDocument(Request);
         }
-        public override Task<intger> UpdateDocument(D_Document infomation, ServerCallContext context)
+        public override Task<intger> UpdateDocument(D_Document Request, ServerCallContext context)
         {
-            return proxy.UpdateDocument(infomation);
+            return proxy.UpdateDocument(Request);
         }
 
-        public override Task<intger> RemoveDocument(ProjectUserInfomation infomation,ServerCallContext context) 
+        public override Task<intger> RemoveDocument(ProjectUserInfomation Request,ServerCallContext context) 
         {
-            return proxy.RemoveDocument(infomation);
+            return proxy.RemoveDocument(Request);
         }
         #endregion
         #region Remote
-        public override Task<intger> AddRemoteFile(D_RemoteFile infomation, ServerCallContext context) {
-            return proxy.AddRemoteFile(infomation);
+        public override Task<intger> AddRemoteFile(D_RemoteFile Request, ServerCallContext context) {
+            return proxy.AddRemoteFile(Request);
         }
-        public override Task<D_RemoteFile> GetRemoteFile(UserDbInfomation infomation, ServerCallContext context) {
-            return proxy.GetRemoteFile(infomation);
+        public override Task<D_RemoteFile> GetRemoteFile(UserDbInfomation Request, ServerCallContext context) {
+            return proxy.GetRemoteFile(Request);
         }
-        public override Task<D_RemoteFile> UpdateRemoteFile(D_RemoteFile infomation, ServerCallContext context) {
-            return proxy.UpdateRemoteFile(infomation);
+        public override Task<D_RemoteFile> UpdateRemoteFile(D_RemoteFile Request, ServerCallContext context) {
+            return proxy.UpdateRemoteFile(Request);
         }
-        public override Task<intger> RemoveRemoteFile(UserDbInfomation infomation, ServerCallContext context) 
+        public override Task<intger> RemoveRemoteFile(UserDbInfomation Request, ServerCallContext context) 
         {
-            return proxy.RemoveRemoteFile(infomation);
+            return proxy.RemoveRemoteFile(Request);
         }
-        public override Task<D_RemoteFiles> GetRemoteFiles(UserDbInfomation infomation, ServerCallContext context) {
-            return proxy.GetRemoteFiles(infomation);
+        public override Task<D_RemoteFiles> GetRemoteFiles(UserDbInfomation Request, ServerCallContext context) {
+            return proxy.GetRemoteFiles(Request);
         }
         #endregion
         #region Subject
