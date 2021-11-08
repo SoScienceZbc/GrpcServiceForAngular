@@ -80,7 +80,14 @@ namespace GrpcServiceForAngular.Services
         {
             return Task.FromResult(channel.GetProjects(infomation));
         }
-
+        public Task<intger> AddProjectMember(MemberInformation information)
+        {
+            return Task.FromResult(channel.AddProjectMember(information));
+        }
+        public Task<intger> RemoveProjectMember(MemberInformation information)
+        {
+            return Task.FromResult(channel.RemoveProjectMember(information));
+        }
         #endregion
         #region Docoment
         public Task<D_Documents> GetDocuments(UserDbInfomation infomation)
@@ -128,6 +135,42 @@ namespace GrpcServiceForAngular.Services
         public Task<D_RemoteFiles> GetRemoteFiles(UserDbInfomation infomation)
         {
             return Task.FromResult(channel.GetRemoteFiles(infomation));
+        }
+        #endregion
+        #region Subject
+        public Task<intger> AddSubject(D_Subject subject)
+        {
+            return Task.FromResult(channel.AddSubject(subject));
+        }
+        public Task<D_Subjects> GetSubjects(UserDbInfomation information)
+        {
+            return Task.FromResult(channel.GetSubjects(information));
+        }
+        #endregion
+        #region Project Theme
+        public Task<intger> AddProjectTheme(D_ProjectTheme theme)
+        {
+            return Task.FromResult(channel.AddProjectTheme(theme));
+        }
+        public Task<D_ProjectThemes> Get_ProjectThemes(UserDbInfomation infomation)
+        {
+            return Task.FromResult(channel.GetProjectThemes(infomation));
+        }
+        public Task<D_ProjectThemes> Get_ProjectThemesFromSubject(ThemeFromSubject infomation)
+        {
+            return Task.FromResult(channel.GetProjectThemesFromSubject(infomation));
+        }
+        public Task<intger> RemoveProjectTheme(ProjectThemeUserInfomation infomation)
+        {
+            return Task.FromResult(channel.RemoveProjectTheme(infomation));
+        }
+        public Task<intger> AddProjectThemeCoTeacher(ProjectThemeUserInfomation infomation)
+        {
+            return Task.FromResult(channel.AddProjectThemeCoTeacher(infomation));
+        }
+        public Task<intger> RemoveProjectThemeCoTeacher(ProjectThemeUserInfomation infomation)
+        {
+            return Task.FromResult(channel.RemoveProjectThemeCoTeacher(infomation));
         }
         #endregion
     }
