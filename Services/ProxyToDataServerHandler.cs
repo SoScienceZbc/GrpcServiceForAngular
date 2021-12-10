@@ -21,14 +21,14 @@ namespace GrpcServiceForAngular.Services
         private GrpcDatabaseProject.GrpcDatabaseProjectClient channel;
         public ProxyToDataServerHandler()
         {
-            //AppContext.SetSwitch("System.Net.Http.SocketsHttpHandler.Http2UnencryptedSupport", true);
-            //AppContext.SetSwitch("System.Net.Http.SocketsHttpHandler.Http2Support", true);
+            AppContext.SetSwitch("System.Net.Http.SocketsHttpHandler.Http2UnencryptedSupport", true);
+            AppContext.SetSwitch("System.Net.Http.SocketsHttpHandler.Http2Support", true);
             channel = new GrpcDatabaseProject.GrpcDatabaseProjectClient(
-                GrpcChannel.ForAddress("http://localhost:33700",
+                GrpcChannel.ForAddress("https://127.0.0.1:33701",
                 new GrpcChannelOptions
                 {
                     HttpClient = new HttpClient(handler),
-                    Credentials = /*new Grpc.Core.SslCredentials()*/ Grpc.Core.ChannelCredentials.Insecure,                    
+                    Credentials = new Grpc.Core.SslCredentials() // Grpc.Core.ChannelCredentials.Insecure,                    
 
                 }));
         }
