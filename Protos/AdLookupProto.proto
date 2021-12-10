@@ -18,3 +18,4 @@ message LoginRepley {
 	bool Admin = 2;
 	string Token = 3;
 }
+

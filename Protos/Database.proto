@@ -86,7 +86,6 @@ message D_ProjectThemes {
     repeated D_ProjectTheme ProjectTheme = 1;
 }
 // Project
-
 message D_Project{
 	int32 id = 1;
     string name = 2;
@@ -96,6 +95,7 @@ message D_Project{
     repeated D_Document documents = 6;
     int32 ProjectThemeID = 7;
     bool CloseToDeletion = 8;
+
 }
 // document
 message D_Document{
