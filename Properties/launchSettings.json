@@ -3,7 +3,8 @@
     "GrpcServiceForAngular": {
       "commandName": "Project",
       "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development"
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "GRPC_DEFAULT_SSL_ROOT_FILE_PATH": "/home/SoScienceUser/soscience_ssl_certificate/soscience.dk.crt",
       }
     }   
   }

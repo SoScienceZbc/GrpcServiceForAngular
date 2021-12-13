@@ -29,11 +29,10 @@ namespace GrpcServiceForAngular.Services
             AppContext.SetSwitch("System.Net.Http.SocketsHttpHandler.Http2UnencryptedSupport", true);
             AppContext.SetSwitch("System.Net.Http.SocketsHttpHandler.Http2Support", true);
             channel = new LoginService.LoginServiceClient(GrpcChannel.ForAddress(new Uri("https://127.0.0.1:33701"),
-                new GrpcChannelOptions
+                new GrpcChannelOptions 
                 {
                     HttpClient = new HttpClient(handler),
                     Credentials = new SslCredentials() //Grpc.Core.ChannelCredentials.Insecure,
-
 
                 }));
         }
