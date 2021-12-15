@@ -14,9 +14,14 @@
 	</PropertyGroup>
 
 	<ItemGroup>
+	  <None Remove="Protos\MockupProto.proto" />
+	</ItemGroup>
+
+	<ItemGroup>
 		<Protobuf Include="Protos\AdLookupProto.proto" />
 		<Protobuf Include="Protos\greet.proto" GrpcServices="Server" />
 		<Protobuf Include="Protos\Database.proto" />
+		<Protobuf Include="Protos\MockupProto.proto" />
 	</ItemGroup>
 
 	<ItemGroup>

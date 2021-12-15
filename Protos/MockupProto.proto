@@ -1,0 +1,18 @@
+syntax = "proto3";
+
+option csharp_namespace = "Proto";
+
+package MockupGRPC;
+
+service loginMockup {
+    rpc loginMockupSuccessful(MockLoginRequest) returns (MockLoginReply) {}
+}
+
+message MockLoginRequest {
+    string username = 1;
+    string pass = 2;
+}
+
+message MockLoginReply {
+    bool MockLoginSuccess = 1;
+}
