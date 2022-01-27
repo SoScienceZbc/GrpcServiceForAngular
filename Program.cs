@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Server.Kestrel.Https;
 using Microsoft.Extensions.Hosting;
 using System;
 using System.Collections.Generic;
@@ -22,6 +23,12 @@ namespace GrpcServiceForAngular
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
                     webBuilder.UseStartup<Startup>();
+                    /*
+                    webBuilder.ConfigureKestrel(o =>
+                    {
+                        o.ConfigureHttpsDefaults(o =>
+                            o.ClientCertificateMode = ClientCertificateMode.RequireCertificate);
+                    });*/
                 });
     }
 

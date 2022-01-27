@@ -7,48 +7,102 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net.Http;
+using System.Net.Security;
+using System.Security.Cryptography.X509Certificates;
+using System.Threading.Channels;
 using System.Threading.Tasks;
 
 namespace GrpcServiceForAngular.Services
 {
     /// <summary>
-    /// This class has the resoponseblity of meaking calls to the dataserver.
+    /// This class has the responsiblity of making calls to the dataserver.
     /// </summary>
     public class LoginToDataServerHandler
     {
-        public static LoginService.LoginServiceClient channel;
+        public static LoginService.LoginServiceClient client;
+
+        //This is a hashed serial used in DangerousServerCertificateCustomValidationCallback() to validate the server certificate.
+        private string HashedSerial { get; } = File.ReadAllText(Directory.GetCurrentDirectory() + "/HashedSerial.txt");
 
         public LoginToDataServerHandler()
         {
-            //var cacert = File.ReadAllText("/etc/ssl/certs/ca-bundle.trust.crt");
-            //var servercert = File.ReadAllText("/home/SoScienceUser/soscience_ssl_certificate/soscience.dk.crt");
-            //var serverkey = File.ReadAllText("/home/SoScienceUser/soscience_ssl_certificate/soscience.dk.key");
-            //var keypair = new KeyCertificatePair(servercert, serverkey);
-
-            GrpcWebHandler handler = new GrpcWebHandler(GrpcWebMode.GrpcWebText, new HttpClientHandler());
-            AppContext.SetSwitch("System.Net.Http.SocketsHttpHandler.Http2UnencryptedSupport", true);
+            //AppContext.SetSwitch("System.Net.Http.SocketsHttpHandler.Http2UnencryptedSupport", true);
             AppContext.SetSwitch("System.Net.Http.SocketsHttpHandler.Http2Support", true);
-            channel = new LoginService.LoginServiceClient(GrpcChannel.ForAddress(new Uri("https://127.0.0.1:33701"),
-                new GrpcChannelOptions 
+
+            client = CreateGrpcClient("https://localhost:33701");          
+        }
+
+        /// <summary>
+        /// Sets up a Proto client and channel for making Grpc calls to the SSHAgent login service
+        /// </summary>
+        /// <param name="channelURL"></param>
+        /// <returns></returns>
+        private LoginService.LoginServiceClient CreateGrpcClient(string channelURL)
+        {
+            HttpClientHandler http_handler = new HttpClientHandler();
+
+            http_handler.ServerCertificateCustomValidationCallback = DangerousServerCertificateCustomValidationCallback;
+
+            GrpcWebHandler handler = new GrpcWebHandler(GrpcWebMode.GrpcWebText, http_handler);
+
+            LoginService.LoginServiceClient client = new LoginService.LoginServiceClient(
+                GrpcChannel.ForAddress(new Uri(channelURL),
+                new GrpcChannelOptions
                 {
                     HttpClient = new HttpClient(handler),
-                    Credentials = new SslCredentials() //Grpc.Core.ChannelCredentials.Insecure,
-
+                    Credentials = new SslCredentials()
                 }));
+
+            return client;
         }
+
         /// <summary>
-        /// This is acting as the client on the proxt and making the rpc call to the dataserver.
+        /// This checks whether the server's certificate should be trusted or not. More of a workaround. Implement a better way when possible.
         /// </summary>
-        /// <param name="requset"></param>
+        /// <param name="arg1"></param>
+        /// <param name="arg2"></param>
+        /// <param name="arg3"></param>
+        /// <param name="arg4"></param>
         /// <returns></returns>
-        public Task<LoginRepley> LoginAD(LoginRequset requset)
+        private bool DangerousServerCertificateCustomValidationCallback(HttpRequestMessage arg1, X509Certificate2 arg2, X509Chain arg3, SslPolicyErrors arg4)
         {
-            return Task.FromResult(channel.LoginAD(requset));
+            /* Used for debugging purposes
+            Console.WriteLine("\n******CertificateResponse******\n");
+            Console.WriteLine(arg1);
+            Console.WriteLine("X509Certificate2:");
+            Console.WriteLine(arg2);
+            Console.WriteLine("X509Chain:");
+            Console.WriteLine(arg3);
+            Console.WriteLine("SslPolicyErrors:");
+            Console.WriteLine(arg4);
+            Console.WriteLine("\n******CertificateResponse******\n");
+            */
+
+            Sha256Hasher hasher = new Sha256Hasher();
+            string serverSerialHashed = hasher.HashString(arg2.SerialNumber);
+
+            //Compares the received serial with the expected serial
+            if (serverSerialHashed.ToLower() == HashedSerial.ToLower())
+                return true;
+            else
+                return false;
+        }
+
+
+        /// <summary>
+        /// This is acting as the client on the proxy and making the rpc call to the dataserver.
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
+        public Task<LoginRepley> LoginAD(LoginRequset request)
+        {
+            Console.WriteLine("Entered LoginAD method");
+            return Task.FromResult(client.LoginAD(request));
             
         }
-        public Task<LoginRepley> ValidateToken(LoginRepley requset)
+        public Task<LoginRepley> ValidateToken(LoginRepley request)
         {
-            return Task.FromResult(channel.ValidateToken(requset));
+            return Task.FromResult(client.ValidateToken(request));
 
         }
     }

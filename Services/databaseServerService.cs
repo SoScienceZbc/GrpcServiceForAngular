@@ -32,7 +32,8 @@ namespace GrpcServiceForAngular.Services
             return proxy.RemoveProject(Request);
         }
         public override Task<D_Projects> GetProjects(UserDbInfomation Request, ServerCallContext context)
-        {            
+        {
+            Console.WriteLine("Entered databaseServerService GetProjects");
             return proxy.GetProjects(Request);
         }
         public override Task<intger> AddProjectMember(MemberInformation Request, ServerCallContext context)
