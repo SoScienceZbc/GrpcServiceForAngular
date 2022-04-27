@@ -87,6 +87,7 @@ namespace GrpcServiceForAngular.Services
 
         public Task<VideoReply> SendVideo(VideoRequest videoData)
         {
+            Console.WriteLine("Entered SendVideo() in VideoToDataServerHandler");
             return Task.FromResult(client.SendVideo(videoData));
         }
     }
