@@ -31,6 +31,7 @@ namespace GrpcServiceForAngular.Services
             client = CreateGrpcClient("https://localhost:33701");
         }
 
+        #region GrpcClientSetup
         /// <summary>
         /// Sets up a Proto client and channel for making Grpc calls to the SSHAgent database service
         /// </summary>
@@ -86,6 +87,7 @@ namespace GrpcServiceForAngular.Services
             else
                 return false;
         }
+        #endregion
 
         /*
         /// <summary>

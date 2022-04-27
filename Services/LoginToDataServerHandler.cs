@@ -19,7 +19,7 @@ namespace GrpcServiceForAngular.Services
     /// </summary>
     public class LoginToDataServerHandler
     {
-        public static LoginService.LoginServiceClient client;
+        private static LoginService.LoginServiceClient client;
 
         //This is a hashed serial used in DangerousServerCertificateCustomValidationCallback() to validate the server certificate.
         private string HashedSerial { get; } = File.ReadAllText(Directory.GetCurrentDirectory() + "/HashedSerial.txt");
@@ -32,6 +32,7 @@ namespace GrpcServiceForAngular.Services
             client = CreateGrpcClient("https://localhost:33701");          
         }
 
+        #region GrpcClientSetup
         /// <summary>
         /// Sets up a Proto client and channel for making Grpc calls to the SSHAgent login service
         /// </summary>
@@ -55,6 +56,7 @@ namespace GrpcServiceForAngular.Services
 
             return client;
         }
+
 
         /// <summary>
         /// This checks whether the server's certificate should be trusted or not. More of a workaround. Implement a better way when possible.
@@ -87,7 +89,7 @@ namespace GrpcServiceForAngular.Services
             else
                 return false;
         }
-
+        #endregion
 
         /// <summary>
         /// This is acting as the client on the proxy and making the rpc call to the dataserver.
@@ -103,7 +105,6 @@ namespace GrpcServiceForAngular.Services
         public Task<LoginRepley> ValidateToken(LoginRepley request)
         {
             return Task.FromResult(client.ValidateToken(request));
-
         }
     }
 }

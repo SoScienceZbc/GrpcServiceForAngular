@@ -9,13 +9,13 @@ using Grpc.Net.Client;
 using Grpc.Net.Client.Web;
 using System.Net.Security;
 using System.Security.Cryptography.X509Certificates;
+using Proto;
 
 namespace GrpcServiceForAngular.Services
 {
     public class VideoToDataServerHandler
     {
-        //private static VideoServiceProto client;
-
+        private static RemoteMediaService.RemoteMediaServiceClient client;
 
         //This is a hashed serial used in DangerousServerCertificateCustomValidationCallback() to validate the server certificate.
         private string HashedSerial { get; } = File.ReadAllText(Directory.GetCurrentDirectory() + "/HashedSerial.txt");
@@ -24,15 +24,16 @@ namespace GrpcServiceForAngular.Services
         {
             AppContext.SetSwitch("System.Net.Http.SocketsHttpHandler.Http2Support", true);
 
-            //client = CreateGrpcClient("https://localhost:33701");
+            client = CreateGrpcClient("https://localhost:33701");
         }
 
+        #region GrpcClientSetup
         /// <summary>
         /// Sets up a Proto client and channel for making Grpc calls to the SSHAgent video service
         /// </summary>
         /// <param name="channelURL"></param>
         /// <returns></returns>
-        private void CreateGrpcClient(string channelURL)
+        private RemoteMediaService.RemoteMediaServiceClient CreateGrpcClient(string channelURL)
         {
             HttpClientHandler http_handler = new HttpClientHandler();
 
@@ -40,15 +41,15 @@ namespace GrpcServiceForAngular.Services
 
             GrpcWebHandler handler = new GrpcWebHandler(GrpcWebMode.GrpcWebText, http_handler);
 
-            /*LoginService.LoginServiceClient client = new LoginService.LoginServiceClient(
+            RemoteMediaService.RemoteMediaServiceClient client = new RemoteMediaService.RemoteMediaServiceClient(
                 GrpcChannel.ForAddress(new Uri(channelURL),
                 new GrpcChannelOptions
                 {
                     HttpClient = new HttpClient(handler),
                     Credentials = new SslCredentials()
-                }));*/
+                }));
 
-            //return client;
+            return client;
         }
 
         /// <summary>
@@ -82,10 +83,11 @@ namespace GrpcServiceForAngular.Services
             else
                 return false;
         }
+        #endregion
 
-        /*public Task<VideoReply> UploadVideo(VideoData videoData)
+        public Task<VideoReply> SendVideo(VideoRequest videoData)
         {
-            return Task.FromResult(client.UploadVideo(videoData));
-        }*/
+            return Task.FromResult(client.SendVideo(videoData));
+        }
     }
 }
