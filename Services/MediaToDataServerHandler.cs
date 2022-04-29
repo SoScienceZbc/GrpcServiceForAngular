@@ -13,14 +13,14 @@ using Proto;
 
 namespace GrpcServiceForAngular.Services
 {
-    public class VideoToDataServerHandler
+    public class MediaToDataServerHandler
     {
         private static RemoteMediaService.RemoteMediaServiceClient client;
 
         //This is a hashed serial used in DangerousServerCertificateCustomValidationCallback() to validate the server certificate.
         private string HashedSerial { get; } = File.ReadAllText(Directory.GetCurrentDirectory() + "/HashedSerial.txt");
 
-        public VideoToDataServerHandler()
+        public MediaToDataServerHandler()
         {
             AppContext.SetSwitch("System.Net.Http.SocketsHttpHandler.Http2Support", true);
 
@@ -85,10 +85,10 @@ namespace GrpcServiceForAngular.Services
         }
         #endregion
 
-        public Task<VideoReply> SendVideo(VideoRequest videoData)
+        public Task<MediaReply> SendMedia(MediaRequest request)
         {
-            Console.WriteLine("Entered SendVideo() in VideoToDataServerHandler");
-            return Task.FromResult(client.SendVideo(videoData));
+            Console.WriteLine("Entered SendMedia() in MediaToDataServerHandler");
+            return Task.FromResult(client.SendMedia(request));
         }
     }
 }
