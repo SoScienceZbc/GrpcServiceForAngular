@@ -11,8 +11,12 @@ namespace GrpcServiceForAngular
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
-            
-            services.AddGrpc();            
+
+            services.AddGrpc(op =>
+            {
+                op.MaxReceiveMessageSize = null;
+                op.MaxSendMessageSize = null;
+            });
             services.AddCors(o =>
             {
                 o.AddPolicy("MyPolicy", builder =>

@@ -90,5 +90,11 @@ namespace GrpcServiceForAngular.Services
             Console.WriteLine("Entered SendMedia() in MediaToDataServerHandler");
             return Task.FromResult(client.SendMedia(request));
         }
+
+        public Task<MediaRequests> GetMedias(UserDbInformation user)
+        {
+            Console.WriteLine("Entered GetMedias() in MediaToDataServerHandler");
+            return Task.FromResult(client.GetMedias(user));
+        }
     }
 }
