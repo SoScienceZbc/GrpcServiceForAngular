@@ -8,7 +8,7 @@ service RemoteMediaService {
     rpc RetrieveMedia(RetrieveMediaRequest) returns (RetrieveMediaReply);
     rpc UpdateMedia(ChangeTitleRequest) returns (MediaReply);
     rpc DeleteMedia(RetrieveMediaRequest) returns (MediaReply);
-    rpc GetMedias(UserDbInformation) returns (MediaRequests);
+    rpc GetMedias(ProjectInformation) returns (MediaRequests);
 }
 
 message MediaRequest {
@@ -22,31 +22,30 @@ message MediaReply {
     bool ReplySuccessfull = 1;
 }
 
-message UserDbInformation {
-  int32 ID = 1;
-  string username = 2;
+message ProjectInformation {
+    int32 ID = 1;
 }
 
 message RetrieveMediaRequest {
-  int32 ID = 1;
+    int32 ID = 1;
 }
 
 message ChangeTitleRequest {
-  int32 ID = 1;
-  string title = 2;
+    int32 ID = 1;
+    string title = 2;
 }
 
 message RetrieveMediaReply {
-  bytes retrievedBlobdata = 1;
-  string type = 2;
+    bytes retrievedBlobdata = 1;
+    string type = 2;
 }
 
 message MediaRequests {
-  repeated MediasReply AllMedias = 1;
+    repeated MediasReply AllMedias = 1;
 }
 
 message MediasReply {
-  int32 ID = 1;
-  string title = 2;
-  string type = 3;
+    int32 ID = 1;
+    string title = 2;
+    string type = 3;
 }

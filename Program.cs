@@ -15,7 +15,6 @@ namespace GrpcServiceForAngular
         public static void Main(string[] args)
         {
             CreateHostBuilder(args).Build().Run();
-
         }
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
@@ -23,12 +22,11 @@ namespace GrpcServiceForAngular
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
                     webBuilder.UseStartup<Startup>();
-                    /*
+                    
                     webBuilder.ConfigureKestrel(o =>
                     {
-                        o.ConfigureHttpsDefaults(o =>
-                            o.ClientCertificateMode = ClientCertificateMode.RequireCertificate);
-                    });*/
+                        o.Limits.MaxRequestBodySize = null;
+                    });
                 });
     }
 

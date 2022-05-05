@@ -12,14 +12,26 @@ namespace GrpcServiceForAngular.Services
         private static MediaToDataServerHandler mediaHandler = new MediaToDataServerHandler();
         public override Task<MediaReply> SendMedia(MediaRequest request, ServerCallContext context)
         {
-            Console.WriteLine($"Host:{context.Host} called Method:{context.Method}");
-            return mediaHandler.SendMedia(request);
+            MediaReply mr = new MediaReply();
+            try
+            {
+                Console.WriteLine($"Host:{context.Host} called Method:{context.Method}");
+                mr = mediaHandler.SendMedia(request).Result;
+                Console.WriteLine("MediaReply: " + mr.ReplySuccessfull);
+            }
+            catch(Exception e)
+            {
+                Console.WriteLine("InnerException: " + e.InnerException);
+                Console.WriteLine("Error: " + e.Message);
+            }
+
+            return Task.FromResult(mr);
         }
 
-        public override Task<MediaRequests> GetMedias(UserDbInformation user, ServerCallContext context)
+        public override Task<MediaRequests> GetMedias(ProjectInformation project, ServerCallContext context)
         {
             Console.WriteLine($"Host:{context.Host} called Method:{context.Method}");
-            return mediaHandler.GetMedias(user);
+            return mediaHandler.GetMedias(project);
         }
     }
 }
