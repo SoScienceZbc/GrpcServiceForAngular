@@ -24,7 +24,7 @@ namespace GrpcServiceForAngular.Services
         {
             AppContext.SetSwitch("System.Net.Http.SocketsHttpHandler.Http2Support", true);
 
-            client = CreateGrpcClient("https://localhost:33701");
+            client = CreateGrpcClient("https://localhost:33701"); //redirects to SoScienceSSHAgent
         }
 
         #region GrpcClientSetup
@@ -90,11 +90,25 @@ namespace GrpcServiceForAngular.Services
             Console.WriteLine("Entered SendMedia() in MediaToDataServerHandler");
             return Task.FromResult(client.SendMedia(request));
         }
-
         public Task<MediaRequests> GetMedias(ProjectInformation project)
         {
             Console.WriteLine("Entered GetMedias() in MediaToDataServerHandler");
             return Task.FromResult(client.GetMedias(project));
+        }
+        public Task<RetrieveMediaReply> RetrieveMedia(RetrieveMediaRequest request)
+        {
+            Console.WriteLine("Entered RetrieveMedia() in MediaToDataServerHandler");
+            return Task.FromResult(client.RetrieveMedia(request));
+        }
+        public Task<MediaReply> DeleteMedia(RetrieveMediaRequest request)
+        {
+            Console.WriteLine("Entered DeleteMedia() in MediaToDataServerHandler");
+            return Task.FromResult(client.DeleteMedia(request));
+        }
+        public Task<MediaReply> UpdateMedia(ChangeTitleRequest request)
+        {
+            Console.WriteLine("Entered UpdateMedia() in MediaToDataServerHandler");
+            return Task.FromResult(client.UpdateMedia(request));
         }
     }
 }
